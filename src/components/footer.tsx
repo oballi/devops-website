@@ -14,23 +14,23 @@ export function Footer() {
           <div className="space-y-3">
             <h3 className="text-lg font-semibold">DevOps Blog</h3>
             <p className="text-sm text-muted-foreground">
-              Sharing insights and experiences from the world of DevOps engineering.
+              DevOps mühendisliği dünyasından içgörü ve deneyimler paylaşıyorum.
             </p>
           </div>
           
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Links</h3>
+            <h3 className="text-lg font-semibold">Bağlantılar</h3>
             <div className="grid grid-cols-2 gap-2">
-              <Link href="/" className="text-sm hover:underline">Home</Link>
+              <Link href="/" className="text-sm hover:underline">Anasayfa</Link>
               <Link href="/blog" className="text-sm hover:underline">Blog</Link>
-              <Link href="/about" className="text-sm hover:underline">About</Link>
-              <Link href="/projects" className="text-sm hover:underline">Projects</Link>
-              <Link href="/contact" className="text-sm hover:underline">Contact</Link>
+              <Link href="/about" className="text-sm hover:underline">Hakkımda</Link>
+              <Link href="/projects" className="text-sm hover:underline">Projeler</Link>
+              <Link href="/contact" className="text-sm hover:underline">İletişim</Link>
             </div>
           </div>
           
           <div className="space-y-3 flex flex-col items-center">
-            <h3 className="text-lg font-semibold text-center">Connect</h3>
+            <h3 className="text-lg font-semibold text-center">Bağlantı Kur</h3>
             <div className="flex space-x-4 justify-center">
               <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
                 <GithubIcon className="h-5 w-5" />
@@ -51,14 +51,14 @@ export function Footer() {
       <Separator className="my-6 w-full" />
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full mb-8">
         <p className="text-sm text-muted-foreground">
-          © {currentYear} DevOps Blog. All rights reserved.
+          © {currentYear} DevOps Blog. Tüm hakları saklıdır.
         </p>
         <div className="flex gap-4">
           <Link href="/privacy" className="text-sm text-muted-foreground hover:underline">
-            Privacy Policy
+            Gizlilik Politikası
           </Link>
           <Link href="/terms" className="text-sm text-muted-foreground hover:underline">
-            Terms of Service
+            Kullanım Şartları
           </Link>
         </div>
       </div>
