@@ -11,11 +11,11 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    { name: "Anasayfa", href: "/" },
     { name: "Blog", href: "/blog" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: "Hakkımda", href: "/about" },
+    { name: "Projeler", href: "/projects" },
+    { name: "İletişim", href: "/contact" },
   ];
 
   return (
