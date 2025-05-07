@@ -12,17 +12,17 @@ export default function NotFound() {
         <div className="container px-4 md:px-6 flex flex-col items-center text-center space-y-4">
           <div className="space-y-2">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">404</h1>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Page Not Found</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Sayfa Bulunamadı</h2>
             <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Sorry, we couldn't find the page you're looking for.
+              Üzgünüz, aradığınız sayfayı bulamadık.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild>
-              <Link href="/">Go Home</Link>
+              <Link href="/">Ana Sayfa</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/blog">Browse Blog</Link>
+              <Link href="/blog">Blogu Keşfet</Link>
             </Button>
           </div>
         </div>

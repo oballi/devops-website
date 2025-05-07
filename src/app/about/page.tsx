@@ -6,8 +6,8 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "About Me | DevOps Blog",
-  description: "Learn more about the DevOps engineer behind this blog.",
+  title: "Hakkımda | DevOps Blog",
+  description: "Bu blogun arkasındaki DevOps mühendisi hakkında daha fazla bilgi edinin.",
 };
 
 export default function AboutPage() {
@@ -26,10 +26,10 @@ export default function AboutPage() {
               </Avatar>
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  About Me
+                  Hakkımda
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  DevOps Engineer & Technical Writer
+                  DevOps Mühendisi & Teknik Yazar
                 </p>
                 <div className="flex justify-center space-x-4 mt-4">
                   <Link href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground/80">
@@ -55,53 +55,54 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl space-y-8">
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">My Story</h2>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Hikayem</h2>
                 <p className="text-muted-foreground">
-                  Hello! I'm a passionate DevOps engineer with over 8 years of experience in the field. 
-                  I specialize in cloud infrastructure, containerization, CI/CD pipelines, and automation. 
-                  Throughout my career, I've worked with various technologies and platforms, helping 
-                  organizations streamline their development processes and improve their operational efficiency.
+                  Merhaba! Ben 8 yılı aşkın deneyime sahip tutkulu bir DevOps mühendisiyim. 
+                  Bulut altyapısı, konteynerizasyon, CI/CD pipeline'ları ve otomasyon konularında uzmanlaştım. 
+                  Kariyerim boyunca, organizasyonların geliştirme süreçlerini optimize etmelerine ve 
+                  operasyonel verimliliklerini artırmalarına yardımcı olmak için çeşitli teknolojiler ve 
+                  platformlarla çalıştım.
                 </p>
                 <p className="text-muted-foreground">
-                  I started this blog to share my knowledge and experiences with the community. 
-                  My goal is to provide practical insights, tutorials, and best practices that can 
-                  help fellow engineers in their DevOps journey.
+                  Bu blogu, bilgi ve deneyimlerimi toplulukla paylaşmak için başlattım. 
+                  Amacım, DevOps yolculuğunda meslektaşlarıma yardımcı olabilecek pratik içgörüler, 
+                  öğreticiler ve en iyi uygulamalar sunmaktır.
                 </p>
               </div>
 
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Expertise</h2>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Uzmanlık Alanları</h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">Infrastructure & Cloud</h3>
+                      <h3 className="text-xl font-bold mb-2">Altyapı & Bulut</h3>
                       <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                         <li>AWS, Azure, GCP</li>
                         <li>Terraform, CloudFormation</li>
                         <li>Kubernetes, Docker</li>
-                        <li>Infrastructure as Code</li>
+                        <li>Altyapı Kodu (IaC)</li>
                       </ul>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">CI/CD & Automation</h3>
+                      <h3 className="text-xl font-bold mb-2">CI/CD & Otomasyon</h3>
                       <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                         <li>Jenkins, GitHub Actions</li>
                         <li>GitLab CI, CircleCI</li>
                         <li>Ansible, Puppet</li>
-                        <li>Bash, Python scripting</li>
+                        <li>Bash, Python scriptleri</li>
                       </ul>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">Monitoring & Observability</h3>
+                      <h3 className="text-xl font-bold mb-2">İzleme & Gözlemleme</h3>
                       <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                         <li>Prometheus, Grafana</li>
                         <li>ELK Stack</li>
                         <li>Datadog, New Relic</li>
-                        <li>Distributed tracing</li>
+                        <li>Dağıtık izleme</li>
                       </ul>
                     </CardContent>
                   </Card>
@@ -151,22 +152,22 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Certifications</h2>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Sertifikalar</h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="border rounded-lg p-4">
-                    <h3 className="font-bold">AWS Certified DevOps Engineer</h3>
+                    <h3 className="font-bold">AWS Sertifikalı DevOps Mühendisi</h3>
                     <p className="text-sm text-muted-foreground">Amazon Web Services</p>
                   </div>
                   <div className="border rounded-lg p-4">
-                    <h3 className="font-bold">Certified Kubernetes Administrator</h3>
+                    <h3 className="font-bold">Sertifikalı Kubernetes Yöneticisi</h3>
                     <p className="text-sm text-muted-foreground">Cloud Native Computing Foundation</p>
                   </div>
                   <div className="border rounded-lg p-4">
-                    <h3 className="font-bold">Microsoft Azure DevOps Engineer</h3>
+                    <h3 className="font-bold">Microsoft Azure DevOps Mühendisi</h3>
                     <p className="text-sm text-muted-foreground">Microsoft</p>
                   </div>
                   <div className="border rounded-lg p-4">
-                    <h3 className="font-bold">HashiCorp Certified Terraform Associate</h3>
+                    <h3 className="font-bold">HashiCorp Sertifikalı Terraform Uzmanı</h3>
                     <p className="text-sm text-muted-foreground">HashiCorp</p>
                   </div>
                 </div>

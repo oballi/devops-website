@@ -31,7 +31,7 @@ export default function ContactPage() {
 
     // Simulate form submission
     setTimeout(() => {
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success("Mesajınız başarıyla gönderildi! En kısa sürede size geri döneceğim.");
       setFormData({
         name: "",
         email: "",
@@ -53,10 +53,10 @@ export default function ContactPage() {
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Get in Touch
+                  İletişime Geçin
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Have a question or want to collaborate? Feel free to reach out!
+                  Bir sorunuz veya işbirliği için bana ulaşmaktan çekinmeyin!
                 </p>
               </div>
             </div>
@@ -68,10 +68,10 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-8 md:grid-cols-2">
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold tracking-tight">Contact Information</h2>
+                <h2 className="text-2xl font-bold tracking-tight">İletişim Bilgileri</h2>
                 <p className="text-muted-foreground">
-                  Feel free to reach out using the contact form or through any of the channels below.
-                  I'll get back to you as soon as possible.
+                  İletişime geçmek için formu doldurun veya aşağıdaki kanallardan ulaşın.
+                  En kısa sürede size geri döneceğim.
                 </p>
                 
                 <div className="space-y-4">
@@ -101,7 +101,7 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold tracking-tight">Follow Me</h3>
+                  <h3 className="text-xl font-bold tracking-tight">Bana Takip Et</h3>
                   <div className="flex space-x-4">
                     <Button variant="outline" size="icon" asChild>
                       <a href="https://github.com" target="_blank" rel="noopener noreferrer">
@@ -135,21 +135,21 @@ export default function ContactPage() {
               
               <Card>
                 <CardHeader>
-                  <CardTitle>Send a Message</CardTitle>
+                  <CardTitle>Mesaj Gönder</CardTitle>
                   <CardDescription>
-                    Fill out the form below and I'll get back to you as soon as possible.
+                    Formu doldurun ve en kısa sürede size geri döneceğim.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
-                        Name
+                        Adınız
                       </label>
                       <Input
                         id="name"
                         name="name"
-                        placeholder="Your name"
+                        placeholder="Adınız"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -163,7 +163,7 @@ export default function ContactPage() {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="Your email"
+                        placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -171,12 +171,12 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="subject" className="text-sm font-medium">
-                        Subject
+                        Konu
                       </label>
                       <Input
                         id="subject"
                         name="subject"
-                        placeholder="Subject"
+                        placeholder="Konu"
                         value={formData.subject}
                         onChange={handleChange}
                         required
@@ -184,12 +184,12 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium">
-                        Message
+                        Mesaj
                       </label>
                       <Textarea
                         id="message"
                         name="message"
-                        placeholder="Your message"
+                        placeholder="Mesajınız"
                         rows={5}
                         value={formData.message}
                         onChange={handleChange}
@@ -197,7 +197,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <Button type="submit" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? "Gönderiliyor..." : "Mesaj Gönder"}
                     </Button>
                   </form>
                 </CardContent>
@@ -212,45 +212,45 @@ export default function ContactPage() {
             <div className="mx-auto max-w-3xl space-y-8">
               <div className="text-center space-y-2">
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  Frequently Asked Questions
+                  Sıkça Sorulan Sorular
                 </h2>
                 <p className="text-muted-foreground">
-                  Find answers to common questions about collaboration and consulting.
+                  İşbirliği ve danışmanlık hakkında sık sorulan soruların cevaplarını bulun.
                 </p>
               </div>
               
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">Do you offer consulting services?</h3>
+                  <h3 className="text-xl font-bold">Danışmanlık hizmeti sunuyor musunuz?</h3>
                   <p className="text-muted-foreground">
-                    Yes, I offer consulting services for DevOps implementation, cloud migration, 
-                    CI/CD pipeline optimization, and infrastructure automation. Feel free to reach out 
-                    with your specific needs.
+                    Evet, DevOps uygulaması, bulut migrasyonu, CI/CD pipeline optimizasyonu ve 
+                    altyapı otomasyonu için danışmanlık hizmetleri sunuyorum. Özel ihtiyaçlarınız için 
+                    benimle iletişime geçebilirsiniz.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">Can I guest post on your blog?</h3>
+                  <h3 className="text-xl font-bold">Blogunuzda misafir yazar olabilir miyim?</h3>
                   <p className="text-muted-foreground">
-                    I'm open to high-quality guest posts that provide value to the DevOps community. 
-                    Please send me a message with your proposed topic and outline.
+                    DevOps topluluğuna değer katacak kaliteli misafir yazılarına açığım. 
+                    Lütfen önerdiğiniz konu ve taslak ile birlikte bana bir mesaj gönderin.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">How quickly do you respond to inquiries?</h3>
+                  <h3 className="text-xl font-bold">Sorulara ne kadar sürede yanıt veriyorsunuz?</h3>
                   <p className="text-muted-foreground">
-                    I typically respond to all inquiries within 24-48 hours during business days. 
-                    For urgent matters, please indicate so in your message subject.
+                    Genellikle iş günlerinde tüm sorulara 24-48 saat içinde yanıt veriyorum. 
+                    Acil konular için lütfen mesaj konusunda belirtin.
                   </p>
                 </div>
                 
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">Do you speak at events or conferences?</h3>
+                  <h3 className="text-xl font-bold">Etkinlik veya konferanslarda konuşma yapıyor musunuz?</h3>
                   <p className="text-muted-foreground">
-                    Yes, I'm available for speaking engagements at conferences, webinars, and 
-                    workshops related to DevOps, cloud technologies, and automation. Please 
-                    contact me with details about your event.
+                    Evet, DevOps, bulut teknolojileri ve otomasyon ile ilgili konferanslar, 
+                    web seminerleri ve atölye çalışmalarında konuşma yapmak için müsaitim. 
+                    Lütfen etkinliğiniz hakkında detaylarla birlikte benimle iletişime geçin.
                   </p>
                 </div>
               </div>

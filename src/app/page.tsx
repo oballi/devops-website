@@ -10,27 +10,27 @@ import { ArrowRightIcon, CodeIcon, ServerIcon, TerminalIcon } from "lucide-react
 const featuredPosts = [
   {
     id: 1,
-    title: "Getting Started with Docker for DevOps Engineers",
-    description: "Learn how to use Docker effectively in your DevOps workflow with these practical tips.",
-    date: "May 15, 2023",
-    tags: ["Docker", "Containers", "DevOps"],
-    readingTime: "5 min read",
+    title: "DevOps Mühendisleri için Docker'a Başlangıç",
+    description: "DevOps iş akışınızda Docker'ı etkili bir şekilde kullanmayı öğrenin.",
+    date: "15 Mayıs 2023",
+    tags: ["Docker", "Konteynerler", "DevOps"],
+    readingTime: "5 dk okuma",
   },
   {
     id: 2,
-    title: "Kubernetes Best Practices for Production Environments",
-    description: "Discover how to optimize your Kubernetes clusters for production with these battle-tested strategies.",
-    date: "June 3, 2023",
-    tags: ["Kubernetes", "Cloud", "DevOps"],
-    readingTime: "7 min read",
+    title: "Üretim Ortamları için Kubernetes En İyi Uygulamaları",
+    description: "Kubernetes kümelerinizi üretim için optimize etmenin yollarını keşfedin.",
+    date: "3 Haziran 2023",
+    tags: ["Kubernetes", "Bulut", "DevOps"],
+    readingTime: "7 dk okuma",
   },
   {
     id: 3,
-    title: "CI/CD Pipelines with GitHub Actions",
-    description: "A comprehensive guide to setting up efficient CI/CD pipelines using GitHub Actions.",
-    date: "July 12, 2023",
-    tags: ["CI/CD", "GitHub", "Automation"],
-    readingTime: "6 min read",
+    title: "GitHub Actions ile CI/CD Pipeline'ları",
+    description: "GitHub Actions kullanarak verimli CI/CD pipeline'ları kurma rehberi.",
+    date: "12 Temmuz 2023",
+    tags: ["CI/CD", "GitHub", "Otomasyon"],
+    readingTime: "6 dk okuma",
   },
 ];
 
@@ -46,21 +46,21 @@ export default function Home() {
             <div className="flex flex-col items-center gap-4 text-center w-full">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  DevOps Insights & Best Practices
+                  DevOps İçgörüleri ve En İyi Uygulamalar
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Exploring the world of DevOps engineering with practical guides, tutorials, and insights.
+                  Pratik rehberler, öğreticiler ve içgörülerle DevOps mühendisliği dünyasını keşfedin.
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Button asChild>
                   <Link href="/blog">
-                    Read Blog
+                    Blogu Oku
                     <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href="/about">About Me</Link>
+                  <Link href="/about">Hakkımda</Link>
                 </Button>
               </div>
             </div>
@@ -73,10 +73,10 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center w-full">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-                  Topics I Write About
+                  Yazdığım Konular
                 </h2>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Dive into various DevOps topics with practical examples and real-world applications.
+                  Pratik örnekler ve gerçek dünya uygulamalarıyla çeşitli DevOps konularını keşfedin.
                 </p>
               </div>
             </div>
@@ -85,27 +85,27 @@ export default function Home() {
                 <div className="rounded-full bg-primary/10 p-4">
                   <ServerIcon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Infrastructure</h3>
+                <h3 className="text-xl font-bold">Altyapı</h3>
                 <p className="text-center text-muted-foreground">
-                  Cloud platforms, IaC, and modern infrastructure solutions.
+                  Bulut platformları, IaC ve modern altyapı çözümleri.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 rounded-lg p-4">
                 <div className="rounded-full bg-primary/10 p-4">
                   <TerminalIcon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Automation</h3>
+                <h3 className="text-xl font-bold">Otomasyon</h3>
                 <p className="text-center text-muted-foreground">
-                  CI/CD pipelines, testing strategies, and deployment automation.
+                  CI/CD pipeline'ları, test stratejileri ve dağıtım otomasyonu.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-2 rounded-lg p-4">
                 <div className="rounded-full bg-primary/10 p-4">
                   <CodeIcon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Development</h3>
+                <h3 className="text-xl font-bold">Geliştirme</h3>
                 <p className="text-center text-muted-foreground">
-                  DevOps culture, best practices, and tools for developers.
+                  DevOps kültürü, en iyi uygulamalar ve geliştiriciler için araçlar.
                 </p>
               </div>
             </div>
@@ -118,10 +118,10 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center w-full">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-                  Featured Blog Posts
+                  Öne Çıkan Blog Yazıları
                 </h2>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Check out some of my most popular articles on DevOps topics.
+                  DevOps konularında en popüler makalelerimi keşfedin.
                 </p>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function Home() {
                     </div>
                     <Button variant="link" className="px-0" asChild>
                       <Link href={`/blog/${post.id}`}>
-                        Read More
+                        Devamını Oku
                         <ArrowRightIcon className="ml-1 h-3 w-3" />
                       </Link>
                     </Button>
@@ -162,7 +162,7 @@ export default function Home() {
             <div className="flex justify-center mt-8">
               <Button variant="outline" asChild>
                 <Link href="/blog">
-                  View All Posts
+                  Tüm Yazıları Gör
                   <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -176,28 +176,28 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center w-full">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-                  Stay Updated
+                  Güncel Kalın
                 </h2>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Subscribe to my newsletter for the latest DevOps insights and tutorials.
+                  En son DevOps içgörüleri ve öğreticileri için bültenime abone olun.
                 </p>
               </div>
               <div className="w-full max-w-md space-y-2 mx-auto">
                 <form className="flex space-x-2">
                   <input
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="Enter your email"
+                    placeholder="E-posta adresinizi girin"
                     type="email"
                     required
                   />
-                  <Button type="submit">Subscribe</Button>
+                  <Button type="submit">Abone Ol</Button>
                 </form>
                 <p className="text-xs text-muted-foreground">
-                  I'll never share your email with anyone else.
+                  E-posta adresinizi kimseyle paylaşmayacağım.
                 </p>
               </div>
             </div>
-          </div>
+        </div>
         </section>
       </main>
       

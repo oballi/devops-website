@@ -11,57 +11,57 @@ import { Separator } from "@/components/ui/separator";
 const blogPosts = [
   {
     id: 1,
-    title: "Getting Started with Docker for DevOps Engineers",
-    description: "Learn how to use Docker effectively in your DevOps workflow with these practical tips.",
-    date: "May 15, 2023",
-    tags: ["Docker", "Containers", "DevOps"],
-    readingTime: "5 min read",
+    title: "DevOps Mühendisleri için Docker'a Başlangıç",
+    description: "DevOps iş akışınızda Docker'ı etkili bir şekilde kullanmayı öğrenin.",
+    date: "15 Mayıs 2023",
+    tags: ["Docker", "Konteynerler", "DevOps"],
+    readingTime: "5 dk okuma",
   },
   {
     id: 2,
-    title: "Kubernetes Best Practices for Production Environments",
-    description: "Discover how to optimize your Kubernetes clusters for production with these battle-tested strategies.",
-    date: "June 3, 2023",
-    tags: ["Kubernetes", "Cloud", "DevOps"],
-    readingTime: "7 min read",
+    title: "Üretim Ortamları için Kubernetes En İyi Uygulamaları",
+    description: "Kubernetes kümelerinizi üretim için optimize etmenin yollarını keşfedin.",
+    date: "3 Haziran 2023",
+    tags: ["Kubernetes", "Bulut", "DevOps"],
+    readingTime: "7 dk okuma",
   },
   {
     id: 3,
-    title: "CI/CD Pipelines with GitHub Actions",
-    description: "A comprehensive guide to setting up efficient CI/CD pipelines using GitHub Actions.",
-    date: "July 12, 2023",
-    tags: ["CI/CD", "GitHub", "Automation"],
-    readingTime: "6 min read",
+    title: "GitHub Actions ile CI/CD Pipeline'ları",
+    description: "GitHub Actions kullanarak verimli CI/CD pipeline'ları kurma rehberi.",
+    date: "12 Temmuz 2023",
+    tags: ["CI/CD", "GitHub", "Otomasyon"],
+    readingTime: "6 dk okuma",
   },
   {
     id: 4,
-    title: "Infrastructure as Code with Terraform",
-    description: "How to manage your infrastructure efficiently using Terraform and best practices for IaC.",
-    date: "August 5, 2023",
-    tags: ["Terraform", "IaC", "Cloud"],
-    readingTime: "8 min read",
+    title: "Terraform ile Altyapı Kodu",
+    description: "Terraform kullanarak altyapınızı verimli bir şekilde yönetin ve IaC için en iyi uygulamaları öğrenin.",
+    date: "5 Ağustos 2023",
+    tags: ["Terraform", "IaC", "Bulut"],
+    readingTime: "8 dk okuma",
   },
   {
     id: 5,
-    title: "Monitoring Microservices with Prometheus and Grafana",
-    description: "Set up comprehensive monitoring for your microservices architecture using Prometheus and Grafana.",
-    date: "September 18, 2023",
-    tags: ["Monitoring", "Prometheus", "Grafana"],
-    readingTime: "9 min read",
+    title: "Prometheus ve Grafana ile Mikroservisleri İzleme",
+    description: "Prometheus ve Grafana kullanarak mikroservis mimariniz için kapsamlı izleme kurulumu.",
+    date: "18 Eylül 2023",
+    tags: ["İzleme", "Prometheus", "Grafana"],
+    readingTime: "9 dk okuma",
   },
   {
     id: 6,
-    title: "Securing Your Kubernetes Clusters",
-    description: "Essential security practices to protect your Kubernetes clusters from common vulnerabilities.",
-    date: "October 22, 2023",
-    tags: ["Kubernetes", "Security", "DevOps"],
-    readingTime: "7 min read",
+    title: "Kubernetes Kümelerinizi Güvenli Hale Getirme",
+    description: "Kubernetes kümelerinizi yaygın güvenlik açıklarından korumak için temel güvenlik uygulamaları.",
+    date: "22 Ekim 2023",
+    tags: ["Kubernetes", "Güvenlik", "DevOps"],
+    readingTime: "7 dk okuma",
   },
 ];
 
 export const metadata = {
   title: "Blog | DevOps Blog",
-  description: "Read the latest articles on DevOps engineering, tools, and best practices.",
+  description: "DevOps mühendisliği, araçlar ve en iyi uygulamalar hakkında en son makaleleri okuyun.",
 };
 
 export default function BlogPage() {
@@ -79,7 +79,7 @@ export default function BlogPage() {
                   DevOps Blog
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Explore articles, tutorials, and insights on DevOps engineering.
+                  DevOps mühendisliği hakkında makaleleri, öğreticileri ve içgörüleri keşfedin.
                 </p>
               </div>
             </div>
@@ -115,7 +115,7 @@ export default function BlogPage() {
                     </div>
                     <Button variant="link" className="px-0" asChild>
                       <Link href={`/blog/${post.id}`}>
-                        Read More
+                        Devamını Oku
                         <ArrowRightIcon className="ml-1 h-3 w-3" />
                       </Link>
                     </Button>
@@ -132,7 +132,7 @@ export default function BlogPage() {
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl">
-                  Browse by Category
+                  Kategoriye Göre Göz At
                 </h2>
               </div>
               <div className="flex flex-wrap justify-center gap-2 mt-4">
