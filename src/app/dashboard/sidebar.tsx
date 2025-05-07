@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, LayoutDashboard, FileText } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutDashboard, FileText, Terminal } from "lucide-react";
 
 const menu = [
   { label: "Genel Bakış", href: "/dashboard", icon: LayoutDashboard },
@@ -21,12 +21,15 @@ export function DashboardSidebar({ open, setOpen }: SidebarProps) {
     <aside
       className={cn(
         "fixed md:static left-0 top-0 z-40 min-h-screen bg-background border-r flex flex-col py-8 transition-all duration-300",
-        open ? "w-64" : "w-14"
+        open ? "w-64" : "w-20"
       )}
       style={{ boxShadow: "2px 0 8px 0 rgba(0,0,0,0.03)" }}
     >
       <div className={cn("flex items-center gap-2 mb-8 px-4 transition-all duration-300", open ? "justify-start" : "justify-center")}> 
-        <span className="text-primary text-2xl font-bold">{open ? "Admin Paneli" : ""}</span>
+        <Terminal className="h-6 w-6 text-primary shrink-0" />
+        <span className={cn("text-primary text-2xl font-bold transition-all duration-300", open ? "opacity-100" : "opacity-0 w-0")}>
+          Admin Paneli
+        </span>
       </div>
       <nav className="flex flex-col gap-2 flex-1">
         {menu.map((item) => {
@@ -60,7 +63,7 @@ export function DashboardSidebar({ open, setOpen }: SidebarProps) {
       <button
         className={cn(
           "w-10 h-10 flex items-center justify-center bg-background border rounded-full shadow mx-auto mb-4 transition-all duration-300",
-          open ? "rotate-0" : "rotate-180"
+          open ? "rotate-0" : "rotate-0"
         )}
         onClick={() => setOpen(!open)}
         aria-label={open ? "Menüyü Kapat" : "Menüyü Aç"}
