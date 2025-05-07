@@ -1,102 +1,102 @@
 # DevOps Blog
 
-A modern, minimal blog website for a DevOps engineer to share insights, tutorials, and experiences. Built with Next.js, TypeScript, Tailwind CSS, and Shadcn UI.
+DevOps mühendislerinin içgörülerini, öğreticilerini ve deneyimlerini paylaşabilecekleri modern, minimal bir blog sitesi. Next.js, TypeScript, Tailwind CSS ve Shadcn UI ile geliştirilmiştir.
 
-## Features
+## Özellikler
 
-- **Modern UI**: Clean and minimal design with dark/light mode support
-- **Responsive Design**: Optimized for all devices (mobile, tablet, desktop)
-- **Blog System**: Display and organize blog posts with categories and tags
-- **Projects Showcase**: Display DevOps projects and contributions
-- **Contact Form**: Allow visitors to get in touch
-- **About Page**: Share professional background and expertise
-- **SEO Optimized**: Meta tags for better search engine visibility
+- **Modern Arayüz**: Karanlık/aydınlık mod desteği ile temiz ve minimal tasarım
+- **Duyarlı Tasarım**: Tüm cihazlar için optimize edilmiş (mobil, tablet, masaüstü)
+- **Blog Sistemi**: Kategoriler ve etiketlerle blog yazılarını görüntüleme ve düzenleme
+- **Proje Vitrini**: DevOps projelerini ve katkılarını sergileme
+- **İletişim Formu**: Ziyaretçilerin iletişime geçebilmesi
+- **Hakkında Sayfası**: Profesyonel geçmiş ve uzmanlık alanlarını paylaşma
+- **SEO Optimizasyonu**: Arama motoru görünürlüğü için meta etiketleri
 
-## Tech Stack
+## Teknoloji Yığını
 
 - **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Shadcn UI
-- **Icons**: Lucide React
-- **Theme**: Next Themes for dark/light mode
-- **Date Formatting**: date-fns
+- **Programlama Dili**: TypeScript
+- **Stil**: Tailwind CSS
+- **UI Bileşenleri**: Shadcn UI
+- **İkonlar**: Lucide React
+- **Tema**: Karanlık/aydınlık mod için Next Themes
+- **Tarih Formatı**: date-fns
 
-## Getting Started
+## Başlangıç
 
-### Prerequisites
+### Ön Koşullar
 
-- Node.js 18.17 or later
-- npm or yarn
+- Node.js 18.17 veya daha yeni
+- npm veya yarn
 
-### Installation
+### Kurulum
 
-1. Clone the repository:
+1. Depoyu klonlayın:
 
 ```bash
-git clone https://github.com/yourusername/devops-blog.git
+git clone https://github.com/kullaniciadi/devops-blog.git
 cd devops-blog/frontend
 ```
 
-2. Install dependencies:
+2. Bağımlılıkları yükleyin:
 
 ```bash
 npm install
-# or
+# veya
 yarn install
 ```
 
-3. Run the development server:
+3. Geliştirme sunucusunu başlatın:
 
 ```bash
 npm run dev
-# or
+# veya
 yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+4. Sonucu görmek için tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-## Project Structure
+## Proje Yapısı
 
 ```
 frontend/
-├── public/           # Static assets
+├── public/           # Statik dosyalar
 ├── src/
-│   ├── app/          # App router pages
-│   │   ├── about/    # About page
-│   │   ├── blog/     # Blog pages
-│   │   ├── contact/  # Contact page
-│   │   ├── projects/ # Projects page
-│   ├── components/   # React components
-│   │   ├── ui/       # UI components from shadcn/ui
-│   │   ├── navbar.tsx # Navigation component
-│   │   ├── footer.tsx # Footer component
-│   ├── lib/          # Utility functions
+│   ├── app/          # App router sayfaları
+│   │   ├── about/    # Hakkında sayfası
+│   │   ├── blog/     # Blog sayfaları
+│   │   ├── contact/  # İletişim sayfası
+│   │   ├── projects/ # Projeler sayfası
+│   ├── components/   # React bileşenleri
+│   │   ├── ui/       # shadcn/ui'dan UI bileşenleri
+│   │   ├── navbar.tsx # Navigasyon bileşeni
+│   │   ├── footer.tsx # Alt bilgi bileşeni
+│   ├── lib/          # Yardımcı fonksiyonlar
 ```
 
-## Deployment
+## Dağıtım
 
-This project can be deployed on Vercel with zero configuration:
+Bu proje sıfır yapılandırma ile Vercel'de dağıtılabilir:
 
 ```bash
 npm run build
-# or
+# veya
 yarn build
 ```
 
-## Future Enhancements
+## Gelecek Geliştirmeler
 
-- **Backend Integration**: Add a backend for storing blog posts in a database
-- **Authentication**: Add user authentication for admin functionality
-- **Comments**: Add a commenting system for blog posts
-- **Newsletter**: Add a newsletter subscription feature
-- **Search**: Add search functionality for blog posts
+- **Backend Entegrasyonu**: Blog yazılarını veritabanında saklamak için backend ekleme
+- **Kimlik Doğrulama**: Yönetici işlevselliği için kullanıcı kimlik doğrulama
+- **Yorumlar**: Blog yazıları için yorum sistemi ekleme
+- **Bülten**: Bülten aboneliği özelliği ekleme
+- **Arama**: Blog yazıları için arama işlevselliği ekleme
 
-## License
+## Lisans
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Bu proje MIT Lisansı altında lisanslanmıştır - detaylar için LICENSE dosyasına bakın.
 
-## Acknowledgments
+## Teşekkürler
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)

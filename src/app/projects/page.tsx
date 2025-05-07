@@ -7,16 +7,16 @@ import Link from "next/link";
 import { ExternalLinkIcon, GithubIcon } from "lucide-react";
 
 export const metadata = {
-  title: "Projects | DevOps Blog",
-  description: "Explore my DevOps projects and open-source contributions.",
+  title: "Projeler | DevOps Blog",
+  description: "DevOps projelerimi ve açık kaynak katkılarımı keşfedin.",
 };
 
 // Mock data for projects
 const projects = [
   {
     id: 1,
-    title: "Kubernetes Deployment Manager",
-    description: "A tool for managing and automating Kubernetes deployments across multiple clusters.",
+    title: "Kubernetes Dağıtım Yöneticisi",
+    description: "Birden fazla küme arasında Kubernetes dağıtımlarını yönetmek ve otomatikleştirmek için bir araç.",
     tags: ["Kubernetes", "Go", "CI/CD"],
     github: "https://github.com/username/k8s-deployment-manager",
     demo: "https://k8s-manager-demo.com",
@@ -24,8 +24,8 @@ const projects = [
   },
   {
     id: 2,
-    title: "Infrastructure as Code Templates",
-    description: "A collection of reusable Terraform modules and CloudFormation templates for common infrastructure patterns.",
+    title: "Altyapı Kodu Şablonları",
+    description: "Yaygın altyapı desenleri için yeniden kullanılabilir Terraform modülleri ve CloudFormation şablonları koleksiyonu.",
     tags: ["Terraform", "AWS", "IaC"],
     github: "https://github.com/username/iac-templates",
     demo: "",
@@ -33,8 +33,8 @@ const projects = [
   },
   {
     id: 3,
-    title: "CI/CD Pipeline Generator",
-    description: "A web application that generates CI/CD pipeline configurations for various platforms based on project requirements.",
+    title: "CI/CD Pipeline Oluşturucu",
+    description: "Proje gereksinimlerine göre çeşitli platformlar için CI/CD pipeline yapılandırmaları oluşturan bir web uygulaması.",
     tags: ["CI/CD", "JavaScript", "DevOps"],
     github: "https://github.com/username/cicd-generator",
     demo: "https://cicd-generator.com",
@@ -42,27 +42,27 @@ const projects = [
   },
   {
     id: 4,
-    title: "Cloud Cost Optimizer",
-    description: "A tool that analyzes cloud resource usage and provides recommendations for cost optimization.",
-    tags: ["AWS", "Python", "Cost Optimization"],
+    title: "Bulut Maliyet Optimizasyonu",
+    description: "Bulut kaynak kullanımını analiz eden ve maliyet optimizasyonu için öneriler sunan bir araç.",
+    tags: ["AWS", "Python", "Maliyet Optimizasyonu"],
     github: "https://github.com/username/cloud-cost-optimizer",
     demo: "",
     image: "/project-placeholder.jpg",
   },
   {
     id: 5,
-    title: "Monitoring Dashboard",
-    description: "A customizable monitoring dashboard for visualizing metrics from various sources.",
-    tags: ["Prometheus", "Grafana", "Monitoring"],
+    title: "İzleme Paneli",
+    description: "Çeşitli kaynaklardan gelen metrikleri görselleştirmek için özelleştirilebilir bir izleme paneli.",
+    tags: ["Prometheus", "Grafana", "İzleme"],
     github: "https://github.com/username/monitoring-dashboard",
     demo: "https://monitoring-demo.com",
     image: "/project-placeholder.jpg",
   },
   {
     id: 6,
-    title: "Container Security Scanner",
-    description: "A tool that scans container images for security vulnerabilities and provides remediation recommendations.",
-    tags: ["Docker", "Security", "Python"],
+    title: "Konteyner Güvenlik Tarayıcısı",
+    description: "Konteyner görüntülerini güvenlik açıkları için tarayan ve düzeltme önerileri sunan bir araç.",
+    tags: ["Docker", "Güvenlik", "Python"],
     github: "https://github.com/username/container-security-scanner",
     demo: "",
     image: "/project-placeholder.jpg",
@@ -81,10 +81,10 @@ export default function ProjectsPage() {
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  DevOps Projects
+                  DevOps Projeleri
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Explore my open-source projects and DevOps tools.
+                  Açık kaynak projelerimi ve DevOps araçlarımı keşfedin.
                 </p>
               </div>
             </div>
@@ -146,10 +146,10 @@ export default function ProjectsPage() {
             <div className="mx-auto max-w-3xl space-y-8">
               <div className="text-center space-y-2">
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  Open Source Contributions
+                  Açık Kaynak Katkıları
                 </h2>
                 <p className="text-muted-foreground">
-                  Some of my contributions to open-source DevOps projects.
+                  Açık kaynak DevOps projelerine yaptığım bazı katkılar.
                 </p>
               </div>
               
@@ -166,7 +166,7 @@ export default function ProjectsPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      Contributed to the Kubernetes project by fixing documentation issues and adding examples for custom resource definitions.
+                      Kubernetes projesine dokümantasyon sorunlarını düzelterek ve özel kaynak tanımları için örnekler ekleyerek katkıda bulundum.
                     </p>
                   </CardContent>
                 </Card>
@@ -183,7 +183,7 @@ export default function ProjectsPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      Contributed to the Terraform AWS provider by adding support for new resource types and improving error handling.
+                      Terraform AWS sağlayıcısına yeni kaynak türleri için destek ekleyerek ve hata işlemeyi geliştirerek katkıda bulundum.
                     </p>
                   </CardContent>
                 </Card>
@@ -200,7 +200,7 @@ export default function ProjectsPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
-                      Contributed to the Prometheus project by developing custom exporters for specific applications and improving documentation.
+                      Prometheus projesine belirli uygulamalar için özel dışa aktarıcılar geliştirerek ve dokümantasyonu iyileştirerek katkıda bulundum.
                     </p>
                   </CardContent>
                 </Card>
@@ -214,14 +214,14 @@ export default function ProjectsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center space-y-4">
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Interested in Collaborating?
+                İşbirliği Yapmak İster misiniz?
               </h2>
               <p className="text-muted-foreground">
-                If you're interested in collaborating on a project or have any questions about my work, feel free to reach out.
+                Bir projede işbirliği yapmakla ilgileniyorsanız veya çalışmalarım hakkında sorularınız varsa, lütfen iletişime geçmekten çekinmeyin.
               </p>
               <div className="flex justify-center mt-4">
                 <Button asChild>
-                  <Link href="/contact">Get in Touch</Link>
+                  <Link href="/contact">İletişime Geç</Link>
                 </Button>
               </div>
             </div>
