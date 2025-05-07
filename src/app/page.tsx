@@ -34,7 +34,10 @@ const featuredPosts = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // Simüle edilen yavaş veri yüklemesi
+  //await new Promise((resolve) => setTimeout(resolve, 1));
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

@@ -1,3 +1,5 @@
+> Not: Bu proje Cursor ile oluşturulmuştur. Asıl amaç yeteneklerini görmek ve keşfetmek içindir. 
+
 # DevOps Blog
 
 DevOps mühendislerinin içgörülerini, öğreticilerini ve deneyimlerini paylaşabilecekleri modern, minimal bir blog sitesi. Next.js, TypeScript, Tailwind CSS ve Shadcn UI ile geliştirilmiştir.
