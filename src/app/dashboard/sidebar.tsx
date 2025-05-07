@@ -6,14 +6,14 @@ import {
   ChevronLeft, 
   ChevronRight, 
   LayoutDashboard, 
-  FileText, 
-  Terminal,
+  FileText,
+  BookOpen,
   User,
   Mail,
-  Settings,
   MessageSquare,
   Image,
-  BookOpen
+  Settings,
+  Terminal
 } from "lucide-react";
 import {
   HoverCard,
