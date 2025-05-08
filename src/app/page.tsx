@@ -122,7 +122,7 @@ export default async function Home() {
             
             <div className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                {featuredPosts.map((post) => (
+                {Array.isArray(featuredPosts) && featuredPosts.map((post) => (
                   <Card key={post.id} className="flex flex-col overflow-hidden">
                     <CardHeader className="flex flex-col space-y-1.5">
                       <CardTitle className="line-clamp-2">{post.title}</CardTitle>
@@ -142,13 +142,6 @@ export default async function Home() {
                       </p>
                     </CardContent>
                     <CardFooter className="flex flex-col items-start space-y-2 pt-0">
-                      <div className="flex flex-wrap gap-1">
-                        {post.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
                       <Button variant="link" className="px-0" asChild>
                         <Link href={`/blog/${post.id}`}>
                           Devamını Oku

@@ -83,14 +83,6 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
               <span>•</span>
               <span>{post.reading_time}</span>
             </div>
-            
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
           </div>
           
           <Separator className="my-8" />

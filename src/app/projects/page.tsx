@@ -105,15 +105,6 @@ export default function ProjectsPage() {
                   </div>
                   <CardHeader>
                     <CardTitle>{project.title}</CardTitle>
-                    <CardDescription>
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">{project.description}</p>

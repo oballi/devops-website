@@ -13,7 +13,8 @@ import {
   MessageSquare,
   Image,
   Settings,
-  Terminal
+  Terminal,
+  Tag
 } from "lucide-react";
 import {
   HoverCard,
@@ -24,6 +25,7 @@ import {
 const menu = [
   { label: "Genel Bakış", href: "/dashboard", icon: LayoutDashboard },
   { label: "Bloglar", href: "/dashboard/blogs", icon: FileText },
+  { label: "Kategoriler", href: "/dashboard/categories", icon: Tag },
   { label: "Sayfalar", href: "/dashboard/pages", icon: BookOpen },
   { label: "Hakkımda", href: "/dashboard/about", icon: User },
   { label: "İletişim", href: "/dashboard/contact", icon: Mail },

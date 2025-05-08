@@ -155,15 +155,6 @@ export default async function BlogPage({
                     </p>
                   </CardContent>
                   <CardFooter className="flex flex-col items-start space-y-2 pt-0">
-                    <div className="flex flex-wrap gap-1">
-                      {post.tags.map((tag) => (
-                        <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
-                          <Badge variant="secondary" className="text-xs cursor-pointer hover:bg-primary/90 transition-colors">
-                            {tag}
-                          </Badge>
-                        </Link>
-                      ))}
-                    </div>
                     <Button variant="link" className="px-0" asChild>
                       <Link href={`/blog/${post.id}`}>
                         Devamını Oku

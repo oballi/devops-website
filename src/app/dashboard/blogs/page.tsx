@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
+import { MultiSelectCombobox } from "@/components/ui/multiselect-combobox";
 
 interface BlogPost {
   id: number;
@@ -27,6 +28,14 @@ interface BlogPost {
   created_at: string;
   updated_at: string;
   is_draft: boolean;
+  category_ids: number[];
+}
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  created_at: string;
 }
 
 export default function BlogsPage() {
@@ -39,14 +48,16 @@ export default function BlogsPage() {
     title: "",
     description: "",
     date: format(new Date(), "yyyy-MM-dd"),
-    tags: "",
     reading_time: "",
     content: "",
     is_draft: false,
   });
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
   useEffect(() => {
     fetchBlogPosts();
+    fetchCategories();
   }, []);
 
   const fetchBlogPosts = async () => {
@@ -65,13 +76,23 @@ export default function BlogsPage() {
     }
   };
 
+  const fetchCategories = async () => {
+    const { data, error } = await supabase
+      .from("categories")
+      .select("*")
+      .order("name", { ascending: true });
+    if (!error) setCategories(data || []);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-      const tags = formData.tags.split(',').map(tag => tag.trim());
-      
+      if (selectedCategories.length === 0) {
+        toast.error("En az bir kategori seçmelisiniz");
+        setIsLoading(false);
+        return;
+      }
       if (selectedPost) {
         // Güncelleme
         const { error } = await supabase
@@ -80,14 +101,13 @@ export default function BlogsPage() {
             title: formData.title,
             description: formData.description,
             date: formData.date,
-            tags: tags,
+            category_ids: selectedCategories,
             reading_time: formData.reading_time,
             content: formData.content,
             is_draft: formData.is_draft,
             updated_at: new Date().toISOString(),
           })
           .eq('id', selectedPost.id);
-
         if (error) throw error;
         toast.success('Blog yazısı başarıyla güncellendi');
       } else {
@@ -98,18 +118,16 @@ export default function BlogsPage() {
             title: formData.title,
             description: formData.description,
             date: formData.date,
-            tags: tags,
+            category_ids: selectedCategories,
             reading_time: formData.reading_time,
             content: formData.content,
             is_draft: formData.is_draft,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
           }]);
-
         if (error) throw error;
         toast.success('Blog yazısı başarıyla eklendi');
       }
-
       setIsEditing(false);
       fetchBlogPosts();
       resetForm();
@@ -127,11 +145,11 @@ export default function BlogsPage() {
       title: post.title,
       description: post.description,
       date: post.date,
-      tags: post.tags.join(', '),
       reading_time: post.reading_time,
       content: post.content,
       is_draft: post.is_draft,
     });
+    setSelectedCategories(post.category_ids || []);
     setIsEditing(true);
   };
 
@@ -160,11 +178,11 @@ export default function BlogsPage() {
       title: "",
       description: "",
       date: format(new Date(), "yyyy-MM-dd"),
-      tags: "",
       reading_time: "",
       content: "",
       is_draft: false,
     });
+    setSelectedCategories([]);
     setActiveTab("edit");
   };
 
@@ -198,7 +216,7 @@ export default function BlogsPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="title">Başlık</Label>
                 <Input
@@ -245,17 +263,16 @@ export default function BlogsPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="tags">Etiketler</Label>
-                <Input
-                  id="tags"
-                  value={formData.tags}
-                  onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                  placeholder="DevOps, Docker, Kubernetes (virgülle ayırın)"
-                  required
+              <div>
+                <Label>Kategoriler</Label>
+                <MultiSelectCombobox
+                  options={categories.map((cat) => ({ label: cat.name, value: cat.id }))}
+                  value={selectedCategories}
+                  onChange={(vals) => setSelectedCategories(vals.map(Number))}
+                  
                 />
               </div>
-            </div>
+            </form>
 
             <div className="space-y-4">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -338,14 +355,16 @@ export default function BlogsPage() {
             <CardContent>
               <p className="text-muted-foreground">{post.description}</p>
               <div className="flex flex-wrap gap-2 mt-4">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 bg-muted rounded-md text-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {post.category_ids && post.category_ids.length > 0 && categories
+                  .filter(cat => post.category_ids.includes(cat.id))
+                  .map(cat => (
+                    <span
+                      key={cat.id}
+                      className="px-2 py-1 bg-muted rounded-md text-sm"
+                    >
+                      {cat.name}
+                    </span>
+                  ))}
               </div>
             </CardContent>
           </Card>
