@@ -7,8 +7,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AtSignIcon, GlobeIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,51 @@ export default function ContactPage() {
     message: "",
   });
 
+  const [contactInfo, setContactInfo] = useState({
+    email: "",
+    website: "",
+    location: "",
+    socialMedia: {
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      linkedin: "",
+    },
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetchContactInfo();
+  }, []);
+
+  const fetchContactInfo = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('contact_settings')
+        .select('*')
+        .limit(1);
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        setContactInfo({
+          email: data[0].email || "",
+          website: data[0].website || "",
+          location: data[0].address || "",
+          socialMedia: data[0].social_media || {
+            facebook: "",
+            instagram: "",
+            twitter: "",
+            linkedin: "",
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Veri çekme hatası:', error);
+      toast.error('İletişim bilgileri yüklenirken bir hata oluştu');
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -29,8 +74,20 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const { error } = await supabase
+        .from('contacts')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          }
+        ]);
+
+      if (error) throw error;
+
       toast.success("Mesajınız başarıyla gönderildi! En kısa sürede size geri döneceğim.");
       setFormData({
         name: "",
@@ -38,8 +95,12 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
+    } catch (error) {
+      console.error('Gönderme hatası:', error);
+      toast.error('Mesajınız gönderilirken bir hata oluştu.');
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -79,7 +140,7 @@ export default function ContactPage() {
                     <MailIcon className="h-5 w-5 mt-0.5 text-muted-foreground" />
                     <div>
                       <h3 className="font-medium">Email</h3>
-                      <p className="text-sm text-muted-foreground">contact@devopsblog.com</p>
+                      <p className="text-sm text-muted-foreground">{contactInfo.email}</p>
                     </div>
                   </div>
                   
@@ -87,7 +148,7 @@ export default function ContactPage() {
                     <GlobeIcon className="h-5 w-5 mt-0.5 text-muted-foreground" />
                     <div>
                       <h3 className="font-medium">Website</h3>
-                      <p className="text-sm text-muted-foreground">www.devopsblog.com</p>
+                      <p className="text-sm text-muted-foreground">{contactInfo.website}</p>
                     </div>
                   </div>
                   
@@ -95,7 +156,7 @@ export default function ContactPage() {
                     <MapPinIcon className="h-5 w-5 mt-0.5 text-muted-foreground" />
                     <div>
                       <h3 className="font-medium">Location</h3>
-                      <p className="text-sm text-muted-foreground">San Francisco, CA</p>
+                      <p className="text-sm text-muted-foreground">{contactInfo.location}</p>
                     </div>
                   </div>
                 </div>
@@ -103,32 +164,50 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold tracking-tight">Bana Takip Et</h3>
                   <div className="flex space-x-4">
-                    <Button variant="outline" size="icon" asChild>
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                        <span className="sr-only">GitHub</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" asChild>
-                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                        </svg>
-                        <span className="sr-only">Twitter</span>
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" asChild>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                          <rect width="4" height="12" x="2" y="9"></rect>
-                          <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <span className="sr-only">LinkedIn</span>
-                      </a>
-                    </Button>
+                    {contactInfo.socialMedia.facebook && (
+                      <Button variant="outline" size="icon" asChild>
+                        <a href={contactInfo.socialMedia.facebook} target="_blank" rel="noopener noreferrer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                          </svg>
+                          <span className="sr-only">Facebook</span>
+                        </a>
+                      </Button>
+                    )}
+                    {contactInfo.socialMedia.twitter && (
+                      <Button variant="outline" size="icon" asChild>
+                        <a href={contactInfo.socialMedia.twitter} target="_blank" rel="noopener noreferrer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                          </svg>
+                          <span className="sr-only">Twitter</span>
+                        </a>
+                      </Button>
+                    )}
+                    {contactInfo.socialMedia.linkedin && (
+                      <Button variant="outline" size="icon" asChild>
+                        <a href={contactInfo.socialMedia.linkedin} target="_blank" rel="noopener noreferrer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect width="4" height="12" x="2" y="9"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                          </svg>
+                          <span className="sr-only">LinkedIn</span>
+                        </a>
+                      </Button>
+                    )}
+                    {contactInfo.socialMedia.instagram && (
+                      <Button variant="outline" size="icon" asChild>
+                        <a href={contactInfo.socialMedia.instagram} target="_blank" rel="noopener noreferrer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                            <rect width="20" height="20" x="2" y="2" r="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                          </svg>
+                          <span className="sr-only">Instagram</span>
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -242,15 +321,6 @@ export default function ContactPage() {
                   <p className="text-muted-foreground">
                     Genellikle iş günlerinde tüm sorulara 24-48 saat içinde yanıt veriyorum. 
                     Acil konular için lütfen mesaj konusunda belirtin.
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold">Etkinlik veya konferanslarda konuşma yapıyor musunuz?</h3>
-                  <p className="text-muted-foreground">
-                    Evet, DevOps, bulut teknolojileri ve otomasyon ile ilgili konferanslar, 
-                    web seminerleri ve atölye çalışmalarında konuşma yapmak için müsaitim. 
-                    Lütfen etkinliğiniz hakkında detaylarla birlikte benimle iletişime geçin.
                   </p>
                 </div>
               </div>
