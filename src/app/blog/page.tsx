@@ -13,11 +13,12 @@ interface BlogPost {
   title: string;
   description: string;
   date: string;
-  tags: string[];
   reading_time: string;
   content: string;
   created_at: string;
   updated_at: string;
+  is_draft: boolean;
+  category_ids: number[];
 }
 
 export const metadata = {
@@ -25,19 +26,47 @@ export const metadata = {
   description: "DevOps mühendisliği, araçlar ve en iyi uygulamalar hakkında en son makaleleri okuyun.",
 };
 
-async function getBlogPosts(): Promise<BlogPost[]> {
+async function getBlogPageSize(): Promise<number> {
   const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('is_draft', false)
-    .order('created_at', { ascending: false });
+    .from("settings")
+    .select("value")
+    .eq("key", "blog_page_size")
+    .single();
+  if (!error && data) return Number(data.value);
+  return 6;
+}
 
+async function getBlogPosts(page: number, pageSize: number): Promise<{ posts: BlogPost[]; total: number }> {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+  const { data, error, count } = await supabase
+    .from('blog_posts')
+    .select('*', { count: 'exact' })
+    .eq('is_draft', false)
+    .order('created_at', { ascending: false })
+    .range(from, to);
   if (error) {
     console.error('Blog yazıları yüklenirken hata oluştu:', error);
-    return [];
+    return { posts: [], total: 0 };
   }
+  return { posts: data || [], total: count || 0 };
+}
 
-  return data || [];
+function Pagination({ page, pageCount }: { page: number; pageCount: number }) {
+  if (pageCount <= 1) return null;
+  return (
+    <div className="flex justify-center gap-2 mt-8">
+      {Array.from({ length: pageCount }).map((_, i) => (
+        <Link
+          key={i}
+          href={`/blog?page=${i + 1}`}
+          className={`px-3 py-1 rounded ${page === i + 1 ? "bg-primary text-white" : "bg-muted text-foreground hover:bg-primary/10"}`}
+        >
+          {i + 1}
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 export default async function BlogPage({
@@ -45,21 +74,14 @@ export default async function BlogPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const blogPosts = await getBlogPosts();
-  const selectedTag = searchParams.tag as string | undefined;
-
-  // Tüm blog yazılarından benzersiz etiketleri çıkar
-  const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags))).sort();
-
-  // Seçili etikete göre blog yazılarını filtrele
-  const filteredPosts = selectedTag
-    ? blogPosts.filter(post => post.tags.includes(selectedTag))
-    : blogPosts;
+  const page = Number(searchParams.page) > 0 ? Number(searchParams.page) : 1;
+  const pageSize = await getBlogPageSize();
+  const { posts: blogPosts, total } = await getBlogPosts(page, pageSize);
+  const pageCount = Math.ceil(total / pageSize);
 
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      
       <main className="flex-1">
         {/* Header */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
@@ -76,66 +98,11 @@ export default async function BlogPage({
             </div>
           </div>
         </section>
-
-        {/* Categories */}
-        <section className="w-full py-12 bg-muted/40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl">
-                  Kategoriye Göre Göz At
-                </h2>
-              </div>
-              <div className="flex flex-wrap justify-center gap-2 mt-4">
-                {allTags.map((tag) => (
-                  <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
-                    <Badge 
-                      variant={selectedTag === tag ? "default" : "secondary"}
-                      className="px-3 py-1 text-sm cursor-pointer hover:bg-primary/90 transition-colors"
-                    >
-                      {tag}
-                    </Badge>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Blog Posts */}
         <section className="w-full py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {selectedTag && (
-              <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between bg-muted/60 rounded-lg p-6 shadow-sm transition-all">
-                <div>
-                  <h2 className="text-2xl font-bold flex items-center gap-3">
-                    <Badge variant="default" className="text-base px-4 py-2 bg-primary/90">
-                      {selectedTag}
-                    </Badge>
-                    <span>Kategorisindeki Yazılar</span>
-                  </h2>
-                  <p className="text-muted-foreground mt-2 text-sm">
-                    Sadece <span className="font-semibold">{selectedTag}</span> etiketiyle işaretlenmiş yazılar gösteriliyor.
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-4 md:mt-0"
-                  asChild
-                >
-                  <Link href="/blog">
-                    <span className="flex items-center gap-1">
-                      <span>Filtreyi Kaldır</span>
-                      <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1"><path d="M6 6l4 4m0-4l-4 4"/></svg>
-                    </span>
-                  </Link>
-                </Button>
-              </div>
-            )}
-            
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {filteredPosts.map((post) => (
+              {blogPosts.map((post) => (
                 <Card key={post.id} className="flex flex-col overflow-hidden">
                   <CardHeader className="flex flex-col space-y-1.5">
                     <CardTitle className="line-clamp-2">{post.title}</CardTitle>
@@ -165,10 +132,10 @@ export default async function BlogPage({
                 </Card>
               ))}
             </div>
+            <Pagination page={page} pageCount={pageCount} />
           </div>
         </section>
       </main>
-      
       <Footer />
     </div>
   );
