@@ -6,65 +6,42 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { supabase } from "@/lib/supabase";
 
-// Mock data for blog posts
-const blogPosts = [
-  {
-    id: 1,
-    title: "DevOps Mühendisleri için Docker'a Başlangıç",
-    description: "DevOps iş akışınızda Docker'ı etkili bir şekilde kullanmayı öğrenin.",
-    date: "15 Mayıs 2023",
-    tags: ["Docker", "Konteynerler", "DevOps"],
-    readingTime: "5 dk okuma",
-  },
-  {
-    id: 2,
-    title: "Üretim Ortamları için Kubernetes En İyi Uygulamaları",
-    description: "Kubernetes kümelerinizi üretim için optimize etmenin yollarını keşfedin.",
-    date: "3 Haziran 2023",
-    tags: ["Kubernetes", "Bulut", "DevOps"],
-    readingTime: "7 dk okuma",
-  },
-  {
-    id: 3,
-    title: "GitHub Actions ile CI/CD Pipeline'ları",
-    description: "GitHub Actions kullanarak verimli CI/CD pipeline'ları kurma rehberi.",
-    date: "12 Temmuz 2023",
-    tags: ["CI/CD", "GitHub", "Otomasyon"],
-    readingTime: "6 dk okuma",
-  },
-  {
-    id: 4,
-    title: "Terraform ile Altyapı Kodu",
-    description: "Terraform kullanarak altyapınızı verimli bir şekilde yönetin ve IaC için en iyi uygulamaları öğrenin.",
-    date: "5 Ağustos 2023",
-    tags: ["Terraform", "IaC", "Bulut"],
-    readingTime: "8 dk okuma",
-  },
-  {
-    id: 5,
-    title: "Prometheus ve Grafana ile Mikroservisleri İzleme",
-    description: "Prometheus ve Grafana kullanarak mikroservis mimariniz için kapsamlı izleme kurulumu.",
-    date: "18 Eylül 2023",
-    tags: ["İzleme", "Prometheus", "Grafana"],
-    readingTime: "9 dk okuma",
-  },
-  {
-    id: 6,
-    title: "Kubernetes Kümelerinizi Güvenli Hale Getirme",
-    description: "Kubernetes kümelerinizi yaygın güvenlik açıklarından korumak için temel güvenlik uygulamaları.",
-    date: "22 Ekim 2023",
-    tags: ["Kubernetes", "Güvenlik", "DevOps"],
-    readingTime: "7 dk okuma",
-  },
-];
+interface BlogPost {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  reading_time: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export const metadata = {
   title: "Blog | DevOps Blog",
   description: "DevOps mühendisliği, araçlar ve en iyi uygulamalar hakkında en son makaleleri okuyun.",
 };
 
-export default function BlogPage() {
+async function getBlogPosts(): Promise<BlogPost[]> {
+  const { data, error } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Blog yazıları yüklenirken hata oluştu:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -87,7 +64,7 @@ export default function BlogPage() {
         </section>
 
         {/* Blog Posts */}
-        <section className="w-full py-12 md:py-24">
+        <section className="w-full py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {blogPosts.map((post) => (
@@ -95,9 +72,13 @@ export default function BlogPage() {
                   <CardHeader className="flex flex-col space-y-1.5">
                     <CardTitle className="line-clamp-2">{post.title}</CardTitle>
                     <CardDescription className="flex items-center text-xs">
-                      <span>{post.date}</span>
+                      <span>{new Date(post.date).toLocaleDateString('tr-TR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}</span>
                       <span className="mx-1">•</span>
-                      <span>{post.readingTime}</span>
+                      <span>{post.reading_time}</span>
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1">
@@ -127,7 +108,7 @@ export default function BlogPage() {
         </section>
 
         {/* Categories */}
-        <section className="w-full py-12 md:py-24 bg-muted/40">
+        <section className="w-full py-12 bg-muted/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center gap-4 text-center">
               <div className="space-y-2">
