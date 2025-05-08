@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { format } from "date-fns";
 import { supabase } from "@/lib/supabase";
+import { use } from "react";
 
 interface BlogPost {
   id: number;
@@ -21,8 +22,9 @@ interface BlogPost {
   updated_at: string;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const post = await getBlogPost(parseInt(params.id));
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const post = await getBlogPost(parseInt(id));
   
   if (!post) {
     return {
@@ -52,8 +54,9 @@ async function getBlogPost(id: number): Promise<BlogPost | null> {
   return data;
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-  const postId = parseInt(params.id);
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const postId = parseInt(id);
   const post = await getBlogPost(postId);
   
   if (!post) {
