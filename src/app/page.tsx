@@ -108,7 +108,7 @@ export default async function Home() {
 
         {/* Featured Blog Posts */}
         <section className="w-full py-12 md:py-24 bg-muted/40">
-          <div className="container mx-auto px-4 md:px-6 flex flex-col items-center justify-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center space-y-4 text-center w-full">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
@@ -120,43 +120,45 @@ export default async function Home() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              {featuredPosts.map((post) => (
-                <Card key={post.id} className="flex flex-col overflow-hidden">
-                  <CardHeader className="flex flex-col space-y-1.5">
-                    <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                    <CardDescription className="flex items-center text-xs">
-                      <span>{new Date(post.date).toLocaleDateString('tr-TR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}</span>
-                      <span className="mx-1">•</span>
-                      <span>{post.reading_time}</span>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-1">
-                    <p className="line-clamp-3 text-sm text-muted-foreground">
-                      {post.description}
-                    </p>
-                  </CardContent>
-                  <CardFooter className="flex flex-col items-start space-y-2 pt-0">
-                    <div className="flex flex-wrap gap-1">
-                      {post.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <Button variant="link" className="px-0" asChild>
-                      <Link href={`/blog/${post.id}`}>
-                        Devamını Oku
-                        <ArrowRightIcon className="ml-1 h-3 w-3" />
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+            <div className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                {featuredPosts.map((post) => (
+                  <Card key={post.id} className="flex flex-col overflow-hidden">
+                    <CardHeader className="flex flex-col space-y-1.5">
+                      <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+                      <CardDescription className="flex items-center text-xs">
+                        <span>{new Date(post.date).toLocaleDateString('tr-TR', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}</span>
+                        <span className="mx-1">•</span>
+                        <span>{post.reading_time}</span>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-1">
+                      <p className="line-clamp-3 text-sm text-muted-foreground">
+                        {post.description}
+                      </p>
+                    </CardContent>
+                    <CardFooter className="flex flex-col items-start space-y-2 pt-0">
+                      <div className="flex flex-wrap gap-1">
+                        {post.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button variant="link" className="px-0" asChild>
+                        <Link href={`/blog/${post.id}`}>
+                          Devamını Oku
+                          <ArrowRightIcon className="ml-1 h-3 w-3" />
+                        </Link>
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
             </div>
             
             <Button variant="outline" className="mt-8" asChild>

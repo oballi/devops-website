@@ -29,6 +29,7 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
+    .eq('is_draft', false)
     .order('created_at', { ascending: false });
 
   if (error) {
@@ -39,8 +40,21 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   return data || [];
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const blogPosts = await getBlogPosts();
+  const selectedTag = searchParams.tag as string | undefined;
+
+  // Tüm blog yazılarından benzersiz etiketleri çıkar
+  const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags))).sort();
+
+  // Seçili etikete göre blog yazılarını filtrele
+  const filteredPosts = selectedTag
+    ? blogPosts.filter(post => post.tags.includes(selectedTag))
+    : blogPosts;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -63,11 +77,65 @@ export default async function BlogPage() {
           </div>
         </section>
 
+        {/* Categories */}
+        <section className="w-full py-12 bg-muted/40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl">
+                  Kategoriye Göre Göz At
+                </h2>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2 mt-4">
+                {allTags.map((tag) => (
+                  <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
+                    <Badge 
+                      variant={selectedTag === tag ? "default" : "secondary"}
+                      className="px-3 py-1 text-sm cursor-pointer hover:bg-primary/90 transition-colors"
+                    >
+                      {tag}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Blog Posts */}
         <section className="w-full py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {selectedTag && (
+              <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between bg-muted/60 rounded-lg p-6 shadow-sm transition-all">
+                <div>
+                  <h2 className="text-2xl font-bold flex items-center gap-3">
+                    <Badge variant="default" className="text-base px-4 py-2 bg-primary/90">
+                      {selectedTag}
+                    </Badge>
+                    <span>Kategorisindeki Yazılar</span>
+                  </h2>
+                  <p className="text-muted-foreground mt-2 text-sm">
+                    Sadece <span className="font-semibold">{selectedTag}</span> etiketiyle işaretlenmiş yazılar gösteriliyor.
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-4 md:mt-0"
+                  asChild
+                >
+                  <Link href="/blog">
+                    <span className="flex items-center gap-1">
+                      <span>Filtreyi Kaldır</span>
+                      <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1"><path d="M6 6l4 4m0-4l-4 4"/></svg>
+                    </span>
+                  </Link>
+                </Button>
+              </div>
+            )}
+            
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {blogPosts.map((post) => (
+              {filteredPosts.map((post) => (
                 <Card key={post.id} className="flex flex-col overflow-hidden">
                   <CardHeader className="flex flex-col space-y-1.5">
                     <CardTitle className="line-clamp-2">{post.title}</CardTitle>
@@ -89,9 +157,11 @@ export default async function BlogPage() {
                   <CardFooter className="flex flex-col items-start space-y-2 pt-0">
                     <div className="flex flex-wrap gap-1">
                       {post.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
+                        <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
+                          <Badge variant="secondary" className="text-xs cursor-pointer hover:bg-primary/90 transition-colors">
+                            {tag}
+                          </Badge>
+                        </Link>
                       ))}
                     </div>
                     <Button variant="link" className="px-0" asChild>
@@ -103,30 +173,6 @@ export default async function BlogPage() {
                   </CardFooter>
                 </Card>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Categories */}
-        <section className="w-full py-12 bg-muted/40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl">
-                  Kategoriye Göre Göz At
-                </h2>
-              </div>
-              <div className="flex flex-wrap justify-center gap-2 mt-4">
-                <Badge className="px-3 py-1 text-sm">Docker</Badge>
-                <Badge className="px-3 py-1 text-sm">Kubernetes</Badge>
-                <Badge className="px-3 py-1 text-sm">CI/CD</Badge>
-                <Badge className="px-3 py-1 text-sm">Cloud</Badge>
-                <Badge className="px-3 py-1 text-sm">Terraform</Badge>
-                <Badge className="px-3 py-1 text-sm">Monitoring</Badge>
-                <Badge className="px-3 py-1 text-sm">Security</Badge>
-                <Badge className="px-3 py-1 text-sm">Automation</Badge>
-                <Badge className="px-3 py-1 text-sm">DevOps</Badge>
-              </div>
             </div>
           </div>
         </section>
